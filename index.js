@@ -29,50 +29,49 @@ async function run() {
         const hotelsCollection = client.db("SRbnbHotel").collection("hotels")
         const reserveCollection = client.db("SRbnbHotel").collection("reserves")
         const bookingCollection = client.db('SRbnbHotel').collection('bookings')
+        const favouriteCollection = client.db('SRbnbHotel').collection("favourits")
+        const subscribeCollection = client.db('SRbnbHotel').collection("subscribes")
 
-
-        // app.get("/search", async(req, res)=>{
-        //     const {country, guest, rate}= req.query
-       
         
 
-        //     const filter = {
-        //         "pleace.country" : country,
-        //         "room.guest": rate
-
-        //     }
-
-        //     const result = await hotelsCollection.find(filter).toArray()
-        //     res.send(result)
-            
-        // })
-
-
-
-          app.post('/booking', async(req, res) =>{
-            const book = req.body     
-            const result = await bookingCollection.insertOne(book)  
+        app.post("/subscrib", async(req, res)=>{
+            const data = req.body 
+            const result = await subscribeCollection.insertOne(data)
             res.send(result)
         })
 
-     
+
+        app.post('/favourite', async(req, res)=>{
+            const favouriteData = req.body 
+            const result = await favouriteCollection.insertOne(favouriteData)
+            res.send(result)
+        })
+
+
+        app.post('/booking', async (req, res) => {
+            const book = req.body
+            const result = await bookingCollection.insertOne(book)
+            res.send(result)
+        })
 
 
 
 
 
-        app.get('/reserve', async(req, res)=>{
-            const email = req.query.email 
-    
-            const filter = {email: email}
+
+
+        app.get('/reserve', async (req, res) => {
+            const email = req.query.email
+
+            const filter = { email: email }
             const result = await reserveCollection.find(filter).toArray()
             res.send(result)
         })
 
 
 
-        app.post('/reserve', async(req, res)=>{
-            const info = req.body 
+        app.post('/reserve', async (req, res) => {
+            const info = req.body
             const result = await reserveCollection.insertOne(info)
             res.send(result)
         })
@@ -110,9 +109,9 @@ async function run() {
 
 
 
-        
 
-        
+
+
 
     } finally {
 
