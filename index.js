@@ -32,7 +32,12 @@ async function run() {
         const favouriteCollection = client.db('SRbnbHotel').collection("favourits")
         const subscribeCollection = client.db('SRbnbHotel').collection("subscribes")
 
-        
+        app.delete("/reserve/:id", async(req, res)=>{
+            const id = req.params.id 
+            const filter = {_id: new ObjectId(id)}
+            const result = await reserveCollection.deleteOne(filter)
+            res.send(result)
+        })
 
         app.post("/subscrib", async(req, res)=>{
             const data = req.body 
