@@ -26,6 +26,7 @@ async function run() {
 
 
         const catagoriesCollection = client.db("SRbnbHotel").collection("catagories")
+        const catagoriesCollection2 = client.db("SRbnbHotel").collection("catagories2")
         const hotelsCollection = client.db("SRbnbHotel").collection("hotels")
         const reserveCollection = client.db("SRbnbHotel").collection("reserves")
         const bookingCollection = client.db('SRbnbHotel').collection('bookings')
@@ -85,6 +86,11 @@ async function run() {
 
         app.get("/catagories", async (req, res) => {
             const result = await catagoriesCollection.find({}).toArray()
+            res.send(result)
+        })
+
+        app.get("/catagories2", async (req, res) => {
+            const result = await catagoriesCollection2.find({}).toArray()
             res.send(result)
         })
 
